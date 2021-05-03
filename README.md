@@ -1,12 +1,25 @@
-# Changes preprocessing new data
+# Changes
 
 - Old scripts are located under `scripts/old` and have not been altered
 - New scripts are located under `scripts/new` and have been slightly adapted to create the new data, preprocess and train the model
+	- Get Data:
+		- `download_data_new.sh` extracts the data from the folder in the repo, preprocesses it and prepares the train/test/val split according to the original scripts. An additional script to extract the segments from the folder and save them as one .txt file has been created and included in the bash script.
+	- Training
+		- epoch: 30
+		- emsize: 256
+		- nhid: 256
+		- dropout: 0, 0.2, 0.4, 0.6, 0.8
+		- Training script will train all 5 models consecutively
+	- Generating reviews:
+		- `generate_new.sh` has been modified to create the samples for all 5 trained models.
+
 - Alternative scripts that use only positive reviews are under `scripts/pos`
+- The necessary data (compressed) has been added to the repo, because there have been problems with the download link.
+
 
 # Work flow
 
-Follow the instructions of the original fork to set the system up.
+Follow the instructions of the original fork to set the system up.<br>
 To create the data use:
 
 `./scripts/new/download_data_new.sh`
