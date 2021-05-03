@@ -1,10 +1,32 @@
 # Changes preprocessing new data
 
-`generate_new.sh`
+- Old scripts are located under `scripts/old` and have not been altered
+- New scripts are located under `scripts/new` and have been slightly adapted to create the new data, preprocess and train the model
+- Alternative scripts that use only positive reviews are under `scripts/pos`
+
+# Work flow
+
+Follow the instructions of the original fork to set the system up.
+To create the data use:
+
+`./scripts/new/download_data_new.sh`
+
+To train the model use:
+
+`./scripts/new/train_new.sh`
+
+To generate reviews use:
+
+`./scripts/new/generate_new.sh`
 
 - Edited directory names
 
 # Task 1
+
+I used a dataset containing movie reviews (positive and negative).
+I combine both sentiments because I am interested whether the model can be trained to create somewhat realistic reviews.
+I am especially interested if the model can also generate reviews that are partially praising a movie but also criticising other aspects of it.
+Basically, I am interested how easy it is to create fake reviews automatically and if it is also positive to change the degree of sentiment (pos -> partial -> negative).
 
 The results of the dropout optimisation are, for training: 
 
@@ -78,9 +100,29 @@ Validation:
 | 29 | 190.70 | 169.26 | 157.60 | 155.99 | 196.53 |
 | 30 | 190.70 | 169.26 | 157.60 | 155.99 | 196.09 |
 
+![validation_all.png](https://github.com/goytoom/mt_fs21_ex3/blob/main/Images/validation_all.png)
+
 Testing:
 
 | Testing perplexity  | Dropout 0 | Dropout 0.2 | Dropout 0.4 | Dropout 0.6 | Dropout 0.8 |
 | ------------- | ------------- |------------- |------------- |------------- |------------- |
 | 01 | 193.01 | 176.27 | 163.10 | 161.86 | 203.50 |
 
+# Conclusions
+From the tables and plots, it shows that for a higher dropout we achieve a lower training performance, indicating overfitting for lower dropouts or underfitting for higher dropouts.
+The validation tables and plots show that in fact, the lower dropouts (0, 0.2) seem to overfit and thus achieve lower performance while the highest dropout (0.8) seem to underfit and therefore achieves a low validation performance.
+Finally the test performance shows the best performances for 0.6 (followed closely by 0.4), confirming the previous suspicions.
+We therefore choose 0.6 as our dropout.
+
+An example sample:
+
+`the characters is entertained unintentional in its characters and defines snooze discover watch , the waydowntown fail
+party and young worn purposeful of qui . <eos>`
+
+This does not look convincing. It resembles a review in someway, but does not achieve enough coherence. It starts promising but especially the middle part looses fluency.
+I suspect that this is due to a mixture of positive and negative reviews. Notice, the beginning "the character is entertained unintentional" and the middle part "defines snooze". These fragments seem to be taken from positive and negative reviews in the training data respectively.
+
+I also conducted a quick test with only positive reviews and these results (while still not exceptional) looked more promising:
+`` that stands by acting <unk> , and sure those of -- he <unk> a charming way .``
+It still does not produce a convincing review, however the sentences at least do not flip the sentiment over and over again through out the sentence.
+The performances were also better for this model (test ppl = 120).
