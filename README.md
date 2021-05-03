@@ -41,6 +41,8 @@ The results of the dropout optimisation are, for training:
 | 29 | 53.25 | 61.43 | 73.67 | 110.04 | 207.48 |
 | 30 | 53.25 | 61.23 | 73.37 | 109.27 | 205.67 |
 
+![training_all.png](https://github.com/goytoom/mt_fs21_ex3/blob/main/Images/training_all.png)
+
 Validation:
 
 | Valid. perplexity  | Dropout 0 | Dropout 0.2 | Dropout 0.4 | Dropout 0.6 | Dropout 0.8 |
