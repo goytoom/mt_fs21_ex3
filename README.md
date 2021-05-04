@@ -123,7 +123,7 @@ Testing:
 
 # Conclusions
 From the tables and plots, it shows that for a higher dropout we achieve a lower training performance, indicating overfitting for lower dropouts or underfitting for higher dropouts.
-The validation tables and plots show that in fact, the lower dropouts (0, 0.2) seem to overfit and thus achieve lower performance while the highest dropout (0.8) seem to underfit and therefore achieves a low validation performance.
+The validation tables and plots show that in fact, the lower dropouts (0, 0.2) seem to overfit and thus achieve lower validation performance while the highest dropout (0.8) seem to underfit and also achieves a lower validation performance.
 Finally the test performance shows the best performances for 0.6 (followed closely by 0.4), confirming the previous suspicions.
 We therefore choose 0.6 as our dropout.
 
